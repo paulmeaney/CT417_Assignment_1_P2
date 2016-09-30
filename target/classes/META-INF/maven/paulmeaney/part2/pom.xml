@@ -5,4 +5,11 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>assignment1_part2</name>
   <description>part 2 of assignment 1</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>paulmeaney</groupId>
+  		<artifactId>Part1</artifactId>
+ 		 <version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
