@@ -1,15 +1,13 @@
 package part2;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import part1.CourseProgram;
 import part1.Module;
 import part1.Student;
 
 public class CoursePopulator {
-	
-	private static ArrayList<Integer> findex = new ArrayList<Integer>();
-	private static ArrayList<Integer> lindex = new ArrayList<Integer>();
 	
 
 	public static void main(String[] args) {
@@ -23,7 +21,7 @@ public class CoursePopulator {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		
 		for (int i = 0; i <100; i++){
-			studentList.add(new Student(nameGen(), "04/09/1992", (int)(Math.random()*100000)));
+			studentList.add(new Student(nameGen(), dateGen(), (int)(Math.random()*100000)));
 		}
 		for (int i = 0; i<25; i++){
 			m1.addStudent(studentList.remove(0));
@@ -47,9 +45,10 @@ public class CoursePopulator {
 		
 		
 		
+		
 		}
 	
-		public static String nameGen(){
+		public static String nameGen(){  //Method generates random names from a list of First names and surnames
 			String[] firstnames = {"Brian ", "John ", "Aoife ", "Cosmic ", "Peter ", "Louise ", "Kate ", "Lucy ", "Frank ", "Sean ", "Eoghan ", "Bill ", 
 					"Seamus ", "Samuel ", "Petrol "};
 			
@@ -58,52 +57,65 @@ public class CoursePopulator {
 			
 			int rand = (int)(Math.random()*100);
 			
-			while (rand>=15 && findex.indexOf(rand)==-1) {
+			while (rand>=15 ) {
 				rand = (int)(Math.random()*100); 
 			}
 			
 			String fname = firstnames[rand];
-			findex.add(rand);
+			
 			
 			rand = (int)(Math.random()*100);
-			while (rand>=15 && lindex.indexOf(rand)==-1) {
+			while (rand>=15) {
 				rand = (int)(Math.random()*100); 
 			}
 		
 			String lname = surnames[rand];
-			lindex.add(rand);
+			
 			
 			return fname + lname;
 		}
 		
-		@SuppressWarnings("unused")
-		private static String dateGen(){
+	
+		private static String dateGen(){  //Method generates a random date of birth
 			
+			Random r = new Random();
 			int  day, month, year;
+			String dayop, monthop, yearop;
 			
-			int rand = (int)Math.random()*100;
-			while (rand == 0 && rand > 30){
-				rand = (int)Math.random();
-			}
+			int rand = r.nextInt(29)+1;
+			
 			day = rand;
 			
-			System.out.println(rand);
-			rand = (int)Math.random()*100;
-			while (rand == 0 && rand > 12){
+			
+			rand = r.nextInt(11)+1;
+			while (rand == 0 || rand > 12){
 				rand = (int)Math.random()*100;
 			}
 			month = rand;
 			
-			rand = (int)Math.random()*100;
-			while (rand < 1920 && rand > 2010){
-				rand = (int)Math.random()*10000;
+			rand = (int)Math.random()*10000;
+			while (rand < 1920 || rand > 2005){
+				rand = (int)(Math.random()*10000);
 			}
 			year = rand;
 			
 			if (month == 02 && day > 28)
 				day = 28;
-			System.out.println(Integer.toString(day)+"/"+Integer.toString(month)+"/"+Integer.toString(year));
-			return day+"/"+month+"/"+Integer.toString(year);
+			
+			if(day<10)
+				dayop = "0" + Integer.toString(day);
+			else
+				dayop = Integer.toString(day);
+			
+			if(month<10)
+				monthop = "0" + Integer.toString(month);
+			else
+				monthop = Integer.toString(month);
+			
+			yearop = Integer.toString(year);		
+			String outputDate = dayop + "/" + monthop + "/" + yearop;
+
+			return outputDate;
 			
 		}
 		
